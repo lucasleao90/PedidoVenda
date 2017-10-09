@@ -12,32 +12,35 @@ import javax.persistence.EntityTransaction;
 @Interceptor
 @Transactional
 public class TransactionInterceptor implements Serializable {
+
 	private static final long serialVersionUID = 1L;
+
 	private @Inject EntityManager manager;
 
 	@AroundInvoke
 	public Object invoke(InvocationContext context) throws Exception {
 		EntityTransaction trx = manager.getTransaction();
 		boolean criador = false;
+
 		try {
 			if (!trx.isActive()) {
-				/*
-				 * fazer rollback no que já passou (senão, um futuro commit,
-				 * confirmaria até mesmo operações sem transação)
-				 */
+				// truque para fazer rollback no que já passou
+				// (senão, um futuro commit, confirmaria até mesmo operações sem transação)
 				trx.begin();
 				trx.rollback();
-				/*
-				 * agora deve iniciar a transação
-				 */
+
+				// agora sim inicia a transação
 				trx.begin();
+
 				criador = true;
 			}
+
 			return context.proceed();
 		} catch (Exception e) {
 			if (trx != null && criador) {
 				trx.rollback();
 			}
+
 			throw e;
 		} finally {
 			if (trx != null && trx.isActive() && criador) {
@@ -45,4 +48,5 @@ public class TransactionInterceptor implements Serializable {
 			}
 		}
 	}
+
 }
