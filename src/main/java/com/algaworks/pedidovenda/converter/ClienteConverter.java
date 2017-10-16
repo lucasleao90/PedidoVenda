@@ -5,27 +5,26 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.algaworks.pedidovenda.model.Produto;
-import com.algaworks.pedidovenda.repository.Produtos;
+import com.algaworks.pedidovenda.model.Cliente;
+import com.algaworks.pedidovenda.repository.Clientes;
 import com.algaworks.pedidovenda.util.cdi.CDIServiceLocator;
 
-@FacesConverter(forClass = Produto.class)
-public class ProdutoConverter implements Converter {
+@FacesConverter(forClass=Cliente.class)
+public class ClienteConverter implements Converter {
 
-	// @Inject
-	private Produtos produtos;
-
-	public ProdutoConverter() {
-		produtos = CDIServiceLocator.getBean(Produtos.class);
+	//@Inject
+	private Clientes clientes;
+	
+	public ClienteConverter() {
+		this.clientes = (Clientes) CDIServiceLocator.getBean(Clientes.class);
 	}
-
+	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Produto retorno = null;
+		Cliente retorno = null;
 
 		if (value != null) {
-			Long id = new Long(value);
-			retorno = produtos.porId(id);
+			retorno = this.clientes.porId(new Long(value));
 		}
 
 		return retorno;
@@ -34,10 +33,8 @@ public class ProdutoConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Produto produto = (Produto) value;
-			return produto.getId() == null ? null : produto.getId().toString();
+			return ((Cliente) value).getId().toString();
 		}
-
 		return "";
 	}
 
