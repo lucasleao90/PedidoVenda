@@ -11,14 +11,18 @@
 	</properties>
 
 	<dependencies>
-		<!-- Abstração para envio de e-mails 
-		<dependency>
-			<groupId>com.outjected</groupId>
-			<artifactId>simple-email</artifactId>
-			<version>0.2.1</version>
-			<scope>compile</scope>
-		</dependency>
-		-->
+		 
+	<!--  https://mvnrepository.com/artifact/simple-email/simple-email  -->
+	<dependency>
+		<groupId>com.outjected</groupId>
+		<artifactId>simple-email</artifactId>
+		<version>0.2.5-SNAPSHOT</version>
+	</dependency> 
+	
+	
+
+
+		
 		<!-- Requerido para envio de e-mails -->
 		<dependency>
 			<groupId>javax.mail</groupId>
