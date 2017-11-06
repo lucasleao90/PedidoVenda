@@ -11,18 +11,18 @@
 	</properties>
 
 	<dependencies>
-		 
-	<!--  https://mvnrepository.com/artifact/simple-email/simple-email  -->
-	<dependency>
-		<groupId>com.outjected</groupId>
-		<artifactId>simple-email</artifactId>
-		<version>0.2.5-SNAPSHOT</version>
-	</dependency> 
-	
-	
+
+		<!-- https://mvnrepository.com/artifact/simple-email/simple-email -->
+		<dependency>
+			<groupId>com.outjected</groupId>
+			<artifactId>simple-email</artifactId>
+			<version>0.2.5-SNAPSHOT</version>
+		</dependency>
 
 
-		
+
+
+
 		<!-- Requerido para envio de e-mails -->
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -168,6 +168,7 @@
 		</dependency>
 
 		<!-- Spring Security (autenticação e autorização) -->
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
